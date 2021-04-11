@@ -72,30 +72,6 @@
                     </archive>
                 </configuration>
             </plugin>
-
-            <!-- https://github.com/eclipse/jkube -->
-            <!--plugin>
-                <groupId>org.eclipse.jkube</groupId>
-                <artifactId>kubernetes-maven-plugin</artifactId>
-                <version>${jkube.version}</version>
-                <configuration>
-                    <images>
-                        <image>
-                            <name>springboot:${project.version}</name>
-                            <alias>springboot</alias>
-                            <build>
-                                <from>openjdk:latest</from>
-                                <cmd>java -jar maven/${project.artifactId}-${project.version}.jar</cmd>
-                            </build>
-                            <run>
-                                <wait>
-                                    <log>Greetings from Spring Boot!!</log>
-                                </wait>
-                            </run>
-                        </image>
-                    </images>
-                </configuration>
-            </plugin-->
         </plugins>
     </build>
 
