@@ -34,13 +34,19 @@ This is a simple Spring Boot application. Application is deployed on OpenShift(m
 
     oc new-app registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift~https://github.com/shibaevv/springboot-openshift.git — name=springboot
 
-## 5 
-    # mvn clean install k8s:build k8s:resource k8s:apply
+## 5a. For OpenShift
     # mvn clean package oc:build oc:resource oc:deploy -Popenshift
     mvn clean oc:resource -Popenshift
     mvn package oc:build -Popenshift
     mvn oc:deploy -Popenshift
     oc get pods -w
+
+## 5b. For Kubernetes
+    # mvn clean install k8s:build k8s:resource k8s:apply
+    mvn clean k8s:resource -Pkubernetes
+    mvn package k8s:build -Pkubernetes
+    mvn k8s:deploy -Pkubernetes
+    kubectl get pods
 
 # References
 * [Eclipse jJKube](https://github.com/eclipse/jkube)
