@@ -46,12 +46,21 @@
                 <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
                 <configuration>
-                    <image>
-                        <name>${docker.image.prefix}/${project.artifactId}</name>
-                    </image>
+                    <mainClass>au.com.totemsoft.springboot.openshift.Application</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>au.com.totemsoft.springboot.openshift.Application</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
             <!-- https://github.com/eclipse/jkube -->
@@ -62,8 +71,30 @@
                 <configuration>
                     <images>
                         <image>
-                            <name>myplanner:${project.version}</name>
-                            <alias>myplanner</alias>
+                            <name>springboot:${project.version}</name>
+                            <alias>springboot</alias>
+                            <build>
+                                <from>openjdk:latest</from>
+                                <cmd>java -jar maven/${project.artifactId}-${project.version}.jar</cmd>
+                            </build>
+                            <run>
+                                <wait>
+                                    <log>My Planner!</log>
+                                </wait>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.jkube</groupId>
+                <artifactId>openshift-maven-plugin</artifactId>
+                <version>${jkube.version}</version>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>springboot:${project.version}</name>
+                            <alias>springboot</alias>
                             <build>
                                 <from>openjdk:latest</from>
                                 <cmd>java -jar maven/${project.artifactId}-${project.version}.jar</cmd>

@@ -32,9 +32,15 @@ This is a simple Spring Boot application. Application is deployed on OpenShift(m
     minishift addons install --defaults
     oc adm policy --as system:admin add-cluster-role-to-user cluster-admin developer
 
-    oc new-app registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift~https://github.com/totemsoft/myplanner.git — name=myplanner
+    oc new-app registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift~https://github.com/shibaevv/springboot-openshift.git — name=springboot
+
+## 5 
+    mvn clean install k8s:build k8s:resource k8s:apply
+    mvn clean install oc:build oc:resource oc:apply
 
 # References
+* [Eclipse jJKube](https://github.com/eclipse/jkube)
+* [OpenShift Maven Plugin](https://github.com/eclipse/jkube/tree/master/openshift-maven-plugin)
 * [how-to-setup-openshift-locally-on-mac-os](https://medium.com/swlh/how-to-setup-openshift-locally-on-mac-os-a3b7eb5a5151)
 * [setting-up-virtualization-environment](https://docs.okd.io/3.11/minishift/getting-started/setting-up-virtualization-environment.html#setting-up-virtualbox-driver)
 * [spring-boot-deploy-openshift](https://www.baeldung.com/spring-boot-deploy-openshift)
