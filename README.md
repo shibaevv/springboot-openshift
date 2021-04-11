@@ -35,12 +35,17 @@ This is a simple Spring Boot application. Application is deployed on OpenShift(m
     oc new-app registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift~https://github.com/shibaevv/springboot-openshift.git — name=springboot
 
 ## 5 
-    mvn clean install k8s:build k8s:resource k8s:apply
-    mvn clean install oc:build oc:resource oc:apply
+    # mvn clean install k8s:build k8s:resource k8s:apply
+    # mvn clean package oc:build oc:resource oc:deploy -Popenshift
+    mvn clean oc:resource -Popenshift
+    mvn package oc:build -Popenshift
+    mvn oc:deploy -Popenshift
+    oc get pods -w
 
 # References
 * [Eclipse jJKube](https://github.com/eclipse/jkube)
 * [OpenShift Maven Plugin](https://github.com/eclipse/jkube/tree/master/openshift-maven-plugin)
+* [Spring Boot Sample](https://github.com/eclipse/jkube/tree/master/quickstarts/maven/spring-boot)
 * [how-to-setup-openshift-locally-on-mac-os](https://medium.com/swlh/how-to-setup-openshift-locally-on-mac-os-a3b7eb5a5151)
 * [setting-up-virtualization-environment](https://docs.okd.io/3.11/minishift/getting-started/setting-up-virtualization-environment.html#setting-up-virtualbox-driver)
 * [spring-boot-deploy-openshift](https://www.baeldung.com/spring-boot-deploy-openshift)

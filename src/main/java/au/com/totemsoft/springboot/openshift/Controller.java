@@ -8,7 +8,7 @@ public class Controller {
 
     @GetMapping("/")
     public String index() {
-        return "Spring-Boot app successfully deployed and running on Openshift";
+        return "Greetings from Spring Boot!!";
     }
 
 }
